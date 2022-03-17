@@ -1,9 +1,12 @@
 package com.example;
 
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import java.util.List;
 
+import static org.hamcrest.CoreMatchers.containsString;
 import static org.junit.Assert.*;
 
 public class AnimalTest {
@@ -25,6 +28,17 @@ public class AnimalTest {
     @Test(expected = Exception.class)
     public void animalGetFoodThrowsExceptionTest() throws Exception {
         Animal animal = new Animal();
+        animal.getFood("UndefinedAnimal");
+    }
+
+    @Rule
+    public ExpectedException thrownAnimal = ExpectedException.none();
+
+    @Test
+    public void animalGetFoodThrowsExceptionTextTest() throws Exception {
+        Animal animal = new Animal();
+        thrownAnimal.expect(Exception.class);
+        thrownAnimal.expectMessage("Неизвестный вид животного, используйте значение Травоядное или Хищник");
         animal.getFood("UndefinedAnimal");
     }
 

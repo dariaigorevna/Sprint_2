@@ -38,6 +38,16 @@ public class LionTest {
         Lion lion = new Lion("UndefinedGender", feline);
     }
 
+    @Rule
+    public ExpectedException thrownLion = ExpectedException.none();
+
+    @Test
+    public void lionConstructorThrowsExceptionTextTest() throws Exception {
+        thrownLion.expect(Exception.class);
+        thrownLion.expectMessage("Используйте допустимые значения пола животного - самей или самка");
+        Lion lion = new Lion("UndefinedGender", feline);
+    }
+
     @Test
     public void getKittensTest() throws Exception {
         Lion lion = new Lion("Самка", feline);
